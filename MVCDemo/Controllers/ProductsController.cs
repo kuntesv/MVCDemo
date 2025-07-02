@@ -29,9 +29,14 @@ namespace MVCDemo.Controllers
         public IActionResult Add(ProductViewModel productViewModel)
         {
 
+            if(ModelState.IsValid)
+            {
+                ProductsRepository.AddProduct(productViewModel.Product);
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(productViewModel);
         }
-
 
 
     }
