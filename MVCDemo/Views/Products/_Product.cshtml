@@ -1,12 +1,15 @@
 ﻿@model ProductViewModel
 
-@section title {
-	<h3>Add Products</h3>
+@{
+	string action = ViewBag.Action ?? String.Empty;
+
 }
 
-<partial name="_Product"  model="Model"/>
-@* 
-<form method="post" asp-controller="products" asp-action="add">
+<form method="post" asp-controller="products" asp-action="@action">
+	@if(action?.ToLower() =="edit")
+	{
+		<input type="hidden" asp-for="Product.ProductId" />
+	}
 
 	<div class="text-danger" asp-validation-summary="All"></div>
 
@@ -87,4 +90,4 @@
 		</div>
 	</div>
 
-</form> *@
+</form>

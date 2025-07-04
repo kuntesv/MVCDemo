@@ -46,7 +46,7 @@
             var product = _products.FirstOrDefault(x => x.ProductId == productId);
             if (product != null)
             {
-                return new Product
+                var prod = new Product
                 {
                     ProductId = product.ProductId,
                     Name = product.Name,
@@ -54,6 +54,13 @@
                     Price = product.Price,
                     CategoryId = product.CategoryId
                 };
+
+                if (prod.CategoryId.HasValue)
+                {
+                    prod.Category = CategoriesRepository.GetCategoryById(prod.CategoryId.Value);
+                }
+
+                return prod;
             }
 
             return null;
@@ -81,5 +88,19 @@
                 _products.Remove(product);
             }
         }
+
+        public static List<Product> GetProductsByCategoryId(int categoryId)
+        {
+            var prodcuts = _products.Where(x => x.CategoryId == categoryId);
+            if(prodcuts != null)
+            {
+                return prodcuts.ToList();
+            }
+            else
+            {
+                return new List<Product>();
+            }
+        }
+
     }
 }
