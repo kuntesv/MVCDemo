@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVCDemo.Models;
+using MVCDemo.ViewModel;
 
 namespace MVCDemo.Controllers
 {
@@ -6,7 +8,13 @@ namespace MVCDemo.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var salesViewModel = new SalesViewModel
+            {
+                Categories = CategoriesRepository.GetCategories()
+            };
+
+            return View(salesViewModel);
         }
+
     }
 }

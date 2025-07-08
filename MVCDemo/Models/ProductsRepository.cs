@@ -92,7 +92,7 @@
         public static List<Product> GetProductsByCategoryId(int categoryId)
         {
             var prodcuts = _products.Where(x => x.CategoryId == categoryId);
-            if(prodcuts != null)
+            if (prodcuts != null)
             {
                 return prodcuts.ToList();
             }
@@ -101,6 +101,7 @@
                 return new List<Product>();
             }
         }
+
 
     }
 }
